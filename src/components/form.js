@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Typography,TextField,Button, IconButton} from '@material-ui/core'
+import {Typography,TextField,Button, IconButton, FormControl,Input,InputLabel} from '@material-ui/core'
 import {makeStyles} from '@material-ui/styles'
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
@@ -13,17 +13,20 @@ const useStyles=makeStyles({
      },
      inputFields:{
          width:"300px",
-         
+         marginTop:'100px'
      },
      icons:{
          fontSize:"50px",
-         marginTop:"37px",
-         marginRight:"12px",
+         marginTop:"30px",
+         marginRight:"10px",
          color:"grey"
      },
      header:{
          fontWeight:"bolder",
          color:"grey"
+     },
+     FormControls:{
+        marginTop:"30px"
      }
 })
 
@@ -43,20 +46,26 @@ function Form() {
             
             <form>
                 <EmailIcon className={classes.icons}/>
-                <TextField className={`${classes.item} ${classes.inputFields}`} color="secondary" label="Your Email"/><br/>
-            
-                <LockIcon className={classes.icons}/>                
-                <TextField value={password} onChange={e=>setPassword(e.target.value)} className={`${classes.item} ${classes.inputFields}`} type="password" color="secondary" label="Your Password"
-                     inputProps={{
-                         endAdorment:<InputAdornment position="end">
+                <FormControl className={classes.FormControls}>
+                    <InputLabel>Your Email</InputLabel>
+                    <Input className={classes.inputFields} color="secondary"/>
+                </FormControl>
+                <br/>
+                <LockIcon className={classes.icons}/>
+                <FormControl className={classes.FormControls}>
+                    <InputLabel>Password</InputLabel>
+                    <Input  value={password} onChange={e=>setPassword(e.target.value)} type="password" className={classes.inputFields} color="secondary"
+                        endAdornment={
+                            <InputAdornment position="end">
                                 <IconButton onClick={handleVisible}>
                                     {visible?<Visibility/>:<VisibilityOff/>}
                                 </IconButton>
                             </InputAdornment>
-                        }}
-                /><br/>
+                        }
+                    />    
+                </FormControl><br/>             
                 <Button className={classes.item} variant="contained">Submit</Button>
-                <input/>
+                
             </form>
         </div>
     )
